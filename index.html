@@ -1,70 +1,150 @@
-<!DOVTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zn-CN">
     <head>
-        <meat charset="utf-8">
-        <meat name="viewport" content=""width=device-width,initial-scale=1"/>
+        <meta charset="UTF-8">
+        <meta http-equiv="x-UA-Compatible"content="IE=edge">
+        <meta name="viewport"content="width=device-width,initial-scale=1.0">
         <title>哦呦喝，你来了</title>
         <style>
             body{
                 margin: 0;
+                height:100vh;
+                background-color: #eee;
+            }
+            /* *{
+                border: 1px solid black;
+            } */
+             .yinYing{
+                box-shadow:rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+                    rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 /12%) 0px 1px 3px 0px;
+             }
+            .flex{
+                display:flex;
+            }
+            .baiSe{
+                background-color: white;
+            }
+            .flex1{
+                flex:1;
+            }
+            .column{
+                flex-direction: column;
+            }
+            .mg8{
+                margin:8px;
+            }
+            .mgl8{
+                margin-left: 8px;
+            }
+            .mgr8{
+                margin-right:8px;
+            }
+            .mgt8{
+                margin-top:8px;
+            }
+            .daoHang{
+                padding: 10px 20px;
+                border-bottom: 1px solid rgb(190,190,190);
+                font-size:14px;
+                color:#666:
             }
         </style>
     </head>
-    <body>
-        <div style="
-            background-color:#f1f1f1;
-            text-align: center;
-            padding: 40px;
-        ">
-            <img src="https://kun-hong.github.io/one-html/B38C5AE8CDA45A5F6E2EE8FF21BE7DAA.jpg" alt="修狗" width="183px" height="200px">
+    <body class="flex">
+        <!-- 侧边栏 -->
+        <div style="width:200px;z-index:2"class="baiSe yinYing">
+            <!-- 头像栏 -->
+            <giv style="
+                padding:10px;
+                align-items:center;
+                justify-content: center;
+                border-bottom:1px solid #999;
+            ">
+                <img src="https://kun-hong.github.io/one-html/B38C5AE8CDA45A5F6E2EE8FF21BE7DAA.jpg" 
+                    alt="" 
+                    width="183px" 
+                    height="200px"
+                >
+                <div style="margin-left:10px;">
+                    你瞅啥
+                </div>
+            </giv>
+            <!-- 导航栏 -->
+             <div class="flex1">
+                <div class="daoHang">导航栏</div>
+                <div class="daoHang">导航栏</div>
+                <div class="daoHang">导航栏</div>
+                <div class="daoHang">导航栏</div>
+             </div>
         </div>
-
-        
-        <div style"
-             max-width: 700px;
-             margin:30px auto;padding: 15px;
-             line-height: 1.7;
-             ">
-            <p>你瞅啥</p>
-            <p>来都来了</p>
-            <p>送你个礼物吧</p>
-            <a href="https://www.bilibili.com/video/BV1GJ411x7h7?t=18.0">点击这里</a>
-            <p>欸嘿</p>
+        <!-- 主区域 -->
+        <div class="flex1 flex column">
+            <!-- 头部栏 -->
+            <div style="height:60px;z-index:1"class="baiSe yinYing mgl8">
+                
+            </div>
+            <!-- 内容区 -->
+            <div style="overflow: auto"class="flex1 flex">
+                <!-- 左区 -->
+                <div style="flex: 3"class="flex column mg8">
+                    <!-- 数据区 -->
+                    <div class="flex">
+                        <!-- 数据块 -->
+                        <div style="height:100px"class="flex1 baiSe yinYing mgr8"></div>
+                        <div style="height:100px"class="flex1 baiSe yinYing mgr8"></div>
+                        <div style="height:100px"class="flex1 baiSe yinYing mgr8"></div>
+                        <div style="height:100px"class="flex1 baiSe yinYing"></div>
+                    </div>
+                    <!-- 列表区 -->
+                    <div class="flex column">
+                        <!-- 列表项 -->
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
+                    </div>
+                </div>
+                <!-- 右区 -->
+                <div style="flex: 1;"class="flex column mgr8 mgt8">
+                    <!-- 提示区 -->
+                    <div style="height:200px"class="baiSe yinYing">
+                        <p>来都来了</p>
+                        <p>送你个礼物吧</p>
+                        <a href="https://www.bilibili.com/video/BV1GJ411x7h7?t=18.0">点击这里</a>
+                        <p>欸嘿</p>
+                    </div>
+                    <!-- 消息区1 -->
+                    <div style="height:400px"class="baiSe yinYing mgt8 ">
+                        <!-- 内容 -->
+                        <div style="padding:10px;">
+                            <embed src="https://kun-hong.github.io/one-html/2026_8_19_huihua.mp4" alt="视频" width="108px" height="192px">
+                            <img src="https://kun-hong.github.io/one-html/20260819101127_12_7.jpg" alt="笑猫" width="192px" height="192px">
+                        </div>
+                        
+                    </div>
+                    <!-- 消息区2 -->
+                    <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">  
+                        <p>网页当前不具备实际用途，想了解网页搭建可以前往下方链接</p> 
+                        <p>神的网页</p>
+                        <a href="http://kangwenchang.com/">友情链接</a>
+                        <p>【编程前端入门】</p>
+                        <a href="https://www.bilibili.com/video/BV1hY411j7UM?t=63.5">十分钟学会写网页</a>
+                        <p>HTML 基础</p>
+                        <a href="http://developer.mozilla.org/zh">MDN</a>
+                        <a href="http://www.runoob.com/html">HTML 菜鸟|教程</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <div style="
-            background-color:#f1f1f1;
-            text-align: center;
-            padding: 40px;
-        ">
-            <img src="./20260819101127_12_7.jpg" alt="笑猫" width="192px" height="192px">
-            <embed src="./2026_8_19_huihua.mp4" alt="视频" width="108px" height="192px">
-        </div>
-
-
-        <div style"
-             max-width: 700px;
-             margin:30px auto;padding: 15px;
-             line-height: 1.7;
-             ">
-            <p>网页当前不具备实际用途，想了解网页搭建可以前往下方链接</p>
-        </div>
-
-
-        <div style="
-            background-color:#f1f1f1;
-            text-align: center;
-            padding: 40px;
-            font-size;12px;
-        ">
-            <p>神的网页</p>
-            <a href="http://kangwenchang.com/">友情链接</a>
-            <p>【编程前端入门】</p>
-            <a href="https://www.bilibili.com/video/BV1hY411j7UM?t=63.5">十分钟学会写网页</a>
-            <p>HTML 基础</p>
-            <a href="http://developer.mozilla.org/zh">MDN</a>
-            <a href="http://www.runoob.com/html">HTML 菜鸟|教程</a>
-        </div >
     </body>
 </html>
