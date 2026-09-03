@@ -60,9 +60,33 @@
                 font-size:14px;
                 color:#666:
             }
+
+            /* 表格 */
+            table {
+                width: 100%;
+                border-collapse:collapse;
+                margin-top: 20px;
+            }
+            th,td {
+                border:1px solid #dddddd;
+                text-align:center;
+                padding: 8px;
+            }
+            th {
+                background-color: #dddddd;
+            }
+            button {
+                margin-left: 5px;
+            }
         </style>
     </head>
     <body class="flex">
+        <script>
+            function anNiu(){
+                alert("按键点击");
+            }
+
+        </script>
         <!-- 侧边栏 -->
         <div style="width:100px;z-index:2"class="baiSe yinYing">
             <!-- 头像栏 -->
@@ -180,7 +204,7 @@
                         <!-- 列表项3 -->
                         <div style="padding:10px;"class="flex baiSe yinYing mgt8">
                             <!-- 内容 -->
-                                 <div style="padding:10px;"class="danFen">
+                                <div style="padding:10px;"class="danFen">
                                 <img src="https://kun-hong.github.io/one-html/EEE2193A70DCCCE8434D22C36D602BE5.jpg" 
                                     alt="" 
                                     width="220px" 
@@ -227,6 +251,7 @@
                         <a href="http://kangwenchang.com/">友情链接</a>
                         <p>【编程前端入门】</p>
                         <a href="https://www.bilibili.com/video/BV1hY411j7UM?t=63.5">十分钟学会写网页</a>
+                        <a href="https://www.bilibili.com/video/BV1BT4y1W7Aw?t=11.1">三小时前端入门</a>
                         <p>HTML 基础</p>
                         <a href="http://developer.mozilla.org/zh">MDN</a>
                         <a href="http://www.runoob.com/html">HTML 菜鸟|教程</a>
@@ -235,7 +260,7 @@
                     <!-- 消息区3 -->
                     <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">
                         <!-- 内容 -->
-                         <p>实用工具</p>
+                        <p>实用工具</p>
                         <p>watt Toolkit(提供steam及github网络加速服务)</p>
                         <a href="https://steampp.net/">watt Toolkit</a>
                         <p>注：Github页面打不开的，可以在UU加速器中搜索学术资源加速后挂后台，大多数时候可以解短时间的燃眉之急，失效后可以换网重试。</p>
@@ -246,11 +271,41 @@
                     <!-- 消息区4 -->
                     <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">
                         <!-- 内容 -->
-                         <p>一些地址</p>
+                        <p>一些地址</p>
                         <p>PCL</p>
                         <a href="https://ifdian.net/a/ltcat">PCL网址</a>
                         <p>steam</p>
                         <a href="https://store.steampowered.com/">steam网址</a>
+                    </div>
+
+                    <!-- 消息区5 -->
+                     <div class="baiSe yinYing mgt8 ">
+                        <h1 style="text-align:center">表格的增删改查</h1>
+                        <button onclick="addRow()">新增数据</button>
+                        <table id="table">
+                            <tr>
+                                <th>姓名</th>
+                                <th>联系方式</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <td>无名氏</td>
+                                <td>1145144444</td>
+                                <td>
+                                    <button>编辑</button><button onclick="deleteRow(this)">删除</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <script src="https://kun-hong.github.io/one-html/table.js"></script>
+                    </div>
+
+                    <!-- 消息区6 -->
+                    <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">
+                        <!-- 内容 -->
+                        <div onclick="anNiu()">
+                            按钮
+                        </div>
+                        <input type="text" >
                     </div>
             </div>
         </div>
