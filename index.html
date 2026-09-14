@@ -1,313 +1,328 @@
 <!DOCTYPE html>
-<html lang="zn-CN">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="x-UA-Compatible"content="IE=edge">
         <meta name="viewport"content="width=device-width,initial-scale=1.0">
-        <title>哦呦喝，你来了</title>
+        <title>响应式滚动时间轴</title>
         <style>
-            body{
-                margin: 0;
-                height:100vh;
-                background-color: #d0e5f2;
-            }
-            /* *{
-                border: 1px solid black;
-            } */
-             .yinYing{
-                box-shadow:rgb(0 0 0 / 20%) 0px 2px 1px -1px,
-                    rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 /12%) 0px 1px 3px 0px;
-             }
-            .flex{
-                display:flex;
-            }
-            .baiSe{
-                background-color: white;
-            }
-            .danLan{
-                background-color: #d0e5f2;
-            }
-            .danFen{
-                background-color: #f2af9b;
-            }
-            .danHuang{
-                background-color: #f2cd89;
-            }
-            .shenLan{
-                background-color: #67a3d7;
-            }
-            .flex1{
-                flex:1;
-            }
-            .column{
-                flex-direction: column;
-            }
-            .mg8{
-                margin:8px;
-            }
-            .mgl8{
-                margin-left: 8px;
-            }
-            .mgr8{
-                margin-right:8px;
-            }
-            .mgt8{
-                margin-top:8px;
-            }
-            .daoHang{
-                padding: 10px 20px;
-                border-bottom: 1px solid rgb(190,190,190);
-                font-size:14px;
-                color:#666:
+            *{
+                padding:0;
+                margin:0;
             }
 
-            /* 表格 */
-            table {
+            .shell{
                 width: 100%;
-                border-collapse:collapse;
-                margin-top: 20px;
+                position: relative;
+                padding: 80px 0;
+                transition: 0.3s ease 0s;
+                background-attachment: fixed;
+                background-size: cover;
             }
-            th,td {
-                border:1px solid #dddddd;
-                text-align:center;
-                padding: 8px;
+
+            .shell:before{
+                position: absolute;
+                left:0;
+                top:0;
+                width: 100%;
+                height:100%;
+                background: rgba(99,99,99,0.8);
+                content:"";
             }
-            th {
-                background-color: #dddddd;
+
+            .header{
+                width: 100%;
+                text-align: center;
+                margin-bottom: 80px;
+                position: relative;
             }
-            button {
-                margin-left: 5px;
+
+            .title{
+                color:#fff;
+                font-size:46px;
+                font-weight: normal;
+                margin: 0;
+            }
+
+            .timeline{
+                display: flex;
+                margin: 0 auto;
+                flex-wrap: wrap;
+                flex-direction: column;
+                max-width: 700px;
+                position: relative;
+            }
+
+            .content-title{
+                font-weight: normal;
+                font-size: 66px;
+                margin: -10px 0 0 0;
+                transition: 0.4s;
+                padding: 0 10px;
+                box-sizing: border-box;
+                color: #fff;
+            }
+
+            .content-desc{
+                margin: 0;
+                font-size: 15px;
+                box-sizing: border-box;
+                color:rgba(255,255,255,0.7);
+                line-height: 25x;
+            }
+
+            .timeline:before{
+                position: absolute;
+                left:50%;
+                width: 2px;
+                height: 100%;
+                margin-left: -1px;
+                content: "";
+                background: rgba(255,255,255,0.07);
+            }
+
+            .item{
+                padding:40px 0;
+                opacity: 0.3;
+                filter: blur(2px);
+                transition: 0.5s;
+                box-sizing: border-box;
+                width: calc(50% - 40%);
+                display: flex;
+                position: relative;
+                transform: translateY(-80px);
+            }
+
+            .item:before{
+                content: attr(data-text);
+                letter-spacing: 3px;
+                width: 100%;
+                position: absolute;
+                color: rgba(255,255,255,0.5);
+                font-size: 13px;
+                border-left: 2px solid rgba(255,255,255,0.5);
+                top: 70%;
+                margin-top: -5px;
+                padding-left: 15px;
+                opacity: 0;
+                right: calc(-100% -56%px);
+                font: 900 20px '';
+                letter-spacing: 5px;
+            }
+
+            .item:nth-child(even){
+                align-self: flex-end;
+            }
+
+            .item:nth-child(even):before{
+                right: auto;
+                text-align: right;
+                left:calc(-100% - 56%px);
+                padding-left: 0;
+                border-left: none;
+                border-right: 2px solid rgba(255, 255, 255, 0.5);
+                padding-right: 15px;
+            }
+
+            .item--active{
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+
+            .item--active:before{
+                top: 50%;
+                transition: 0.3s all 0.2s;
+                opacity: 1;
+            }
+
+            .item--active.content-title{
+                margin: -50px 0 20px 0;
+            }
+
+            .img{
+                max-width: 100%;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+            }
+
+            .subtitle{
+                color: rgba(255,255,255,0.5);
+                font-size: 16px;
+                letter-spacing: 5px;
+                margin: 10px 0 0 0;
+                font-weight: normal;
+            }
+
+            .footer{
+                padding: 95px 0;
+                text-align: center;
+            }
+
+            .footer a{
+                color: #999;
+                display: inline-block;
+            }
+
+            @media only screen and (max-width:767px){
+                .item{
+                    align-self: baseline !important;
+                    width: 100%;
+                    padding: 0 30px 150px 80px;
+                }
+
+                .item:before{
+                    left:10px !important;
+                    padding: 0 !important;
+                    top:50px;
+                    text-align: center !important;
+                    width: 60px;
+                    border: none !important;
+                }
+
+                .item:last-child{
+                    padding-bottom: 40px;
+                }
+            }
+
+            @media only screen and (max-width:767px){
+                .timeline:before{
+                    left:40px;
+                }
             }
         </style>
     </head>
-    <body class="flex">
+    <body>
+        <div class="shell"id="shell">
+            <div class="header">
+                <div class="title">标题</div>
+                <div class="subtitle">副标题</div>
+            </div>
+            <div class="timeline">
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/23E292A7EFEAAAEE5A3A13182C195ECA.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/EEE2193A70DCCCE8434D22C36D602BE5.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/9FCAFF26F211C3BB49C1A1F999535DBE.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/3BB28F804FAA22AB344FB29F114805E9.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/23E292A7EFEAAAEE5A3A13182C195ECA.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/23E292A7EFEAAAEE5A3A13182C195ECA.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+
+                <div class="item" data-text="请输入文本">
+                    <div class="content">
+                        <img src="https://kun-hong.github.io/one-html/23E292A7EFEAAAEE5A3A13182C195ECA.jpg"alt=""class="img">
+                        <div class="content-title">2002</div>
+                        <div class="content-desc">说了一些赞美的话</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script scr="./jpuery.min.js"></script>
         <script>
-            function anNiu(){
-                alert("按键点击");
-            }
 
+
+            (function($){
+                $.fn.timeline = function(){
+                    var selectors ={
+                        id:$(this),
+                        item:$(this).find(".item"),
+                        ActiveClass:"item--active",
+                        img:".img"
+                    };
+                    // 将第一个时间轴项目激活，并设置时间轴背景图片为第一个项目的图片
+                    selectors.item.eq(0)addClass(selectors.activeClass);
+                    selectors.id.css(
+                        "background-image",
+                        "url("+
+                        selectors.item.first()
+                        .find(selectors.img)
+                        .attr("src")+
+                        ")"
+                    );
+                    // 获取时间轴项目的总数
+                    var itemLength = selectors.item.length;
+                    // 当页面滚动时，触发滚动事件
+                    $(window).scroll(function(){
+                        var max,main;
+                        // 获取页面滚动的距离
+                        var pos = $(this).scrollTop();
+                        selectors.item.each(function(i){
+                            // 获取当前时间轴项目的最小和最大高度
+                            min = $(this).offset().top;
+                            max = $(this).height() + $(this).offset().top;
+                            var that = $(this);
+                            // 如果滚动到最后 一个项目，并且超过了当前项目高度的一半，
+                            // 则将最后一个项目设置为激活状态，并设置背景图片为最后一个项目的图片
+                            if(i==itemLength - 2 && pos > min + $(this).height()/2){
+                                selectors.item.removeClass(selectors.activeClass);
+                                selectors.id.css(
+                                    "background-image",
+                                    "url("+
+                                    selectors.item.last()
+                                        .find(selectors.img)
+                                        .attr("src")+
+                                    ")"
+                                );
+                                selectors.item.last().addClass(selectors.activeClass);
+                            }
+                            // 如果当前滚动位置在当前项目的最小和最大高度之间，
+                            // 则剑当前项目设置为激活状态，并设置背景图片为当前项目的图片
+                            else if(pos <= max - 10 && pos >= min){
+                                selectors.id.css(
+                                    "background-image",
+                                    "url("+
+                                    $(this)
+                                        .find(selectors.img)
+                                        .attr("src")+
+                                    ")"
+                                );
+                                selectors.item.removeClass(selectors.activeClass);
+                                $(this).addClass(selectors.activeClass);
+                            }
+                        });
+                    });
+                };
+            })(jQuery)
+
+            $("#shell").timeline();
         </script>
-        <!-- 侧边栏 -->
-        <div style="width:100px;z-index:2"class="baiSe yinYing">
-            <!-- 头像栏 -->
-            <giv style="
-                padding:10px;
-                align-items:center;
-                justify-content: center;
-                border-bottom:1px solid #999;
-            ">
-                <img src="https://kun-hong.github.io/one-html/B38C5AE8CDA45A5F6E2EE8FF21BE7DAA.jpg" 
-                    alt="" 
-                    width="61px" 
-                    height="66px"
-                >
-                <div style="margin-left:10px;">
-                    你瞅啥
-                </div>
-            </giv>
-            <!-- 导航栏 -->
-             <div class="flex1">
-                <div class="daoHang"></div>
-                <div class="daoHang"></div>
-                <div class="daoHang"></div>
-                <div class="daoHang"></div>
-             </div>
-        </div>
-        <!-- 主区域 -->
-        <div class="flex1 flex column">
-            <!-- 头部栏 -->
-            <div style="height:60px;z-index:1"class="baiSe yinYing mgl8">
-                <!-- 头部内容 -->
-                <div style="text-align: center;">
-                    "这世间暮色四合，黄昏之时无故人"
-                </div>
-            </div>
-            <!-- 内容区 -->
-            <div style="overflow: auto"class="flex1 flex">
-                <!-- 左区 -->
-                <div style="flex: 3"class="flex column mg8">
-                    <!-- 数据区 -->
-                    <div class="flex">
-                        <!-- 数据块 -->
-                        <div style="height:100px"class="flex1 baiSe yinYing mgr8"></div>
-                        <div style="height:100px"class="flex1 baiSe yinYing mgr8"></div>
-                        <div style="height:100px"class="flex1 baiSe yinYing mgr8"></div>
-                        <div style="height:100px"class="flex1 baiSe yinYing"></div>
-                    </div>
-                    <!-- 列表区 -->
-                    <div class="flex1 column">
-                        <!-- 列表项1 -->
-                        <div style="padding:10px;" class="flex baiSe yinYing mgt8">
-                            <!-- 内容 -->
-                            <div style="padding:10px;"class=" danHuang">
-                                <div>
-                                    <img src="https://kun-hong.github.io/one-html/3BB28F804FAA22AB344FB29F114805E9.jpg" 
-                                        alt="" 
-                                        width="220px" 
-                                        height="260px"
-                                    >
-                                </div>
-                                <div>
-                                    <img src="https://kun-hong.github.io/one-html/9FCAFF26F211C3BB49C1A1F999535DBE.jpg" 
-                                        alt="" 
-                                        width="220px" 
-                                        height="350px"
-                                    >
-                                </div>
-                                
-                                
-                            </div>
-                            
-                            <div class="mgl8 flex1">
-                                <p>
-                                    “西班牙来了，又一支队伍要一日游了。”
-                                </p>
-                                <p>
-                                    “你看看那个守门的，多大了，他能守下几个球？”
-                                </p>
-                                <p>
-                                    “估计就是走个过场吧？”
-                                </p>
-                                <p>
-                                    我的故乡，那是一个非洲的，贫瘠的小地方，人很少，地方也不大，我出生时，那地方还没有什么足球场，我们便在荒地上用废瓶子当足球，一踢就是一个下午，等待出海的父辈们打鱼回来。
-                                </p>
-                                <p>
-                                    现在，我四十岁，对面是西班牙队，那是一支军团，是战车，是滔天巨浪，像是海啸一样席卷过来。
-                                </p>
-                                <p>
-                                    但我是岛屿的孩子啊，我们从岛屿上出生，依靠海洋长大，我怎么会害怕风浪呢。
-                                </p>
-                                <P>
-                                    “那是我穷极一生去等待的巨浪。”
-                                </p>
-                                <p>
-                                    “他吞噬不了 从小站在海边的我”
-                                </p>
-                                <p>
-                                    人们都喜欢年少有为的故事，但，历史无数次奏响老兵不死的终章。
-                                </p>
-                            </div>
-                            
-                        </div>
-                        <!-- 列表项2 -->
-                        <div style="padding:10px;" class="flex baiSe yinYing mgt8">
-                            <!-- 内容 -->
-                            <div style="padding: 10PX;" class="shenLan ">
-                                <img src="https://kun-hong.github.io/one-html/23E292A7EFEAAAEE5A3A13182C195ECA.jpg" 
-                                    alt="" 
-                                    width="384px" 
-                                    height="240px"
-                                >
-                            </div>
-
-                        </div>
-                        <!-- 列表项3 -->
-                        <div style="padding:10px;"class="flex baiSe yinYing mgt8">
-                            <!-- 内容 -->
-                                <div style="padding:10px;"class="danFen">
-                                <img src="https://kun-hong.github.io/one-html/EEE2193A70DCCCE8434D22C36D602BE5.jpg" 
-                                    alt="" 
-                                    width="220px" 
-                                    height="300px"
-                                >
-                            </div>
-                        </div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                        <div style="height:160px"class="baiSe yinYing mgt8"></div>
-                    </div>
-                </div>
-                <!-- 右区 -->
-                <div style="flex: 1;"class="flex column mgr8 mgt8">
-                    <!-- 提示区 -->
-                    <div style="height:200px"class="baiSe yinYing">
-                        <p>来都来了</p>
-                        <p>送你个礼物吧</p>
-                        <a href="https://www.bilibili.com/video/BV1GJ411x7h7?t=18.0">点击这里</a>
-                        <p>欸嘿</p>
-                    </div>
-                    <!-- 消息区1 -->
-                    <div style="height:400px"class="baiSe yinYing mgt8 ">
-                        <!-- 内容 -->
-                        <div style="padding:10px;">
-                            <embed src="https://kun-hong.github.io/one-html/2026_8_19_huihua.mp4" alt="视频" width="108px" height="192px">
-                            <img src="https://kun-hong.github.io/one-html/20260819101127_12_7.jpg" alt="笑猫" width="192px" height="192px">
-                        </div>
-                        
-                    </div>
-                    <!-- 消息区2 -->
-                    <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">  
-                        <!-- 内容 -->
-                        <p>网页当前不具备实际用途，想了解网页搭建可以前往下方链接</p> 
-                        <p>神的网页</p>
-                        <a href="http://kangwenchang.com/">友情链接</a>
-                        <p>【编程前端入门】</p>
-                        <a href="https://www.bilibili.com/video/BV1hY411j7UM?t=63.5">十分钟学会写网页</a>
-                        <a href="https://www.bilibili.com/video/BV1BT4y1W7Aw?t=11.1">三小时前端入门</a>
-                        <p>HTML 基础</p>
-                        <a href="http://developer.mozilla.org/zh">MDN</a>
-                        <a href="http://www.runoob.com/html">HTML 菜鸟|教程</a>
-                    </div>
-
-                    <!-- 消息区3 -->
-                    <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">
-                        <!-- 内容 -->
-                        <p>实用工具</p>
-                        <p>watt Toolkit(提供steam及github网络加速服务)</p>
-                        <a href="https://steampp.net/">watt Toolkit</a>
-                        <p>注：Github页面打不开的，可以在UU加速器中搜索学术资源加速后挂后台，大多数时候可以解短时间的燃眉之急，失效后可以换网重试。</p>
-                        <p>另外，嗯......自己看吧</p>
-                        <a href="https://shiyrj.top/">石用软件</a>
-                    </div>
-
-                    <!-- 消息区4 -->
-                    <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">
-                        <!-- 内容 -->
-                        <p>一些地址</p>
-                        <p>PCL</p>
-                        <a href="https://ifdian.net/a/ltcat">PCL网址</a>
-                        <p>steam</p>
-                        <a href="https://store.steampowered.com/">steam网址</a>
-                    </div>
-
-                    <!-- 消息区5 -->
-                     <div class="baiSe yinYing mgt8 ">
-                        <h1 style="text-align:center">表格的增删改查</h1>
-                        <button onclick="addRow()">新增数据</button>
-                        <table id="table">
-                            <tr>
-                                <th>姓名</th>
-                                <th>联系方式</th>
-                                <th>操作</th>
-                            </tr>
-                            <tr>
-                                <td>无名氏</td>
-                                <td>1145144444</td>
-                                <td>
-                                    <button>编辑</button><button onclick="deleteRow(this)">删除</button>
-                                </td>
-                            </tr>
-                        </table>
-                        <script src="https://kun-hong.github.io/one-html/table.js"></script>
-                    </div>
-
-                    <!-- 消息区6 -->
-                    <div style="height:400px;text-align: center;"class="baiSe yinYing mgt8 ">
-                        <!-- 内容 -->
-                        <div onclick="anNiu()">
-                            按钮
-                        </div>
-                        <input type="text" >
-                    </div>
-            </div>
-        </div>
     </body>
 </html>
