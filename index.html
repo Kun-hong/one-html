@@ -68,7 +68,7 @@
                 font-size: 15px;
                 box-sizing: border-box;
                 color:rgba(255,255,255,0.7);
-                line-height: 25x;
+                line-height: 25px;
             }
 
             .timeline:before{
@@ -255,7 +255,7 @@
                 </div>
             </div>
         </div>
-        <script scr="./jpuery.min.js"></script>
+        <script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery3.1.0/jpuery.min.js"></script>
         <script>
 
 
@@ -264,11 +264,11 @@
                     var selectors ={
                         id:$(this),
                         item:$(this).find(".item"),
-                        ActiveClass:"item--active",
+                        activeClass:"item--active",
                         img:".img"
                     };
                     // 将第一个时间轴项目激活，并设置时间轴背景图片为第一个项目的图片
-                    selectors.item.eq(0)addClass(selectors.activeClass);
+                    selectors.item.eq(0).addClass(selectors.activeClass);
                     selectors.id.css(
                         "background-image",
                         "url("+
@@ -281,7 +281,7 @@
                     var itemLength = selectors.item.length;
                     // 当页面滚动时，触发滚动事件
                     $(window).scroll(function(){
-                        var max,main;
+                        var max,min;
                         // 获取页面滚动的距离
                         var pos = $(this).scrollTop();
                         selectors.item.each(function(i){
@@ -289,9 +289,9 @@
                             min = $(this).offset().top;
                             max = $(this).height() + $(this).offset().top;
                             var that = $(this);
-                            // 如果滚动到最后 一个项目，并且超过了当前项目高度的一半，
+                            // 如果滚动到最后一个项目，并且超过了当前项目高度的一半，
                             // 则将最后一个项目设置为激活状态，并设置背景图片为最后一个项目的图片
-                            if(i==itemLength - 2 && pos > min + $(this).height()/2){
+                            if(i == itemLength - 2 && pos > min + $(this).height()/2){
                                 selectors.item.removeClass(selectors.activeClass);
                                 selectors.id.css(
                                     "background-image",
